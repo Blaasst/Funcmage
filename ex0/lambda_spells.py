@@ -1,28 +1,31 @@
+from typing import Any
 
-artifacts: list[dict] = [{'name': 'Fire Staff',
-                         'power': 71, 'type': 'accessory'},
-                         {'name': 'Water Chalice',
-                         'power': 108, 'type': 'weapon'},
-                         {'name': 'Lightning Rod',
-                         'power': 103, 'type': 'armor'},
-                         {'name': 'Light Prism',
-                         'power': 61, 'type': 'weapon'}]
+artifacts: list[dict[Any, Any]] = [{'name': 'Fire Staff',
+                                   'power': 71, 'type': 'accessory'},
+                                   {'name': 'Water Chalice',
+                                   'power': 108, 'type': 'weapon'},
+                                   {'name': 'Lightning Rod',
+                                   'power': 103, 'type': 'armor'},
+                                   {'name': 'Light Prism',
+                                   'power': 61, 'type': 'weapon'}]
 
-mages: list[dict] = [{'name': 'Phoenix', 'power': 66, 'element': 'lightning'},
+mages: list[dict[Any, Any]] = [
+                     {'name': 'Phoenix', 'power': 66, 'element': 'lightning'},
                      {'name': 'Riley', 'power': 67, 'element': 'lightning'},
                      {'name': 'Storm', 'power': 87, 'element': 'lightning'},
                      {'name': 'Storm', 'power': 62, 'element': 'ice'},
                      {'name': 'Jordan', 'power': 62, 'element': 'shadow'}]
 
-spells = ['freeze', 'shield', 'fireball', 'blizzard']
+spells: list[str] = ['freeze', 'shield', 'fireball', 'blizzard']
 
 
-def artifact_sorter(artifacts: list[dict]) -> list[dict]:
+def artifact_sorter(artifacts: list[dict[Any, Any]]) -> list[dict[Any, Any]]:
     classement = sorted(artifacts, key=lambda j: j['power'], reverse=True)
     return classement
 
 
-def power_filter(mages: list[dict], min_power: int) -> list[dict]:
+def power_filter(mages: list[dict[Any, Any]],
+                 min_power: int) -> list[dict[Any, Any]]:
     filtre = list(filter(lambda j: j['power'] >= min_power, mages))
     return filtre
 
@@ -32,20 +35,18 @@ def spell_transformer(spells: list[str]) -> list[str]:
     return change
 
 
-def mage_stats(mages: list[dict]) -> dict:
-    fatigue: dict = []
+def mage_stats(mages: list[dict[Any, Any]]) -> dict[Any, Any]:
+    fatigue: dict[Any, Any] = {}
     maxi = max(mages, key=lambda j: j['power'])
     mini = min(mages, key=lambda j: j['power'])
     moyenne = sum(map(lambda j: j['power'], mages)) / len(mages)
 
-    fatigue['maxi', maxi]
-    fatigue['mini', mini]
-    fatigue['moyenne', moyenne]
+    fatigue = {"maxi": maxi, 'mini': mini, 'moyenne': moyenne}
     return fatigue
 
 
-def main(mages: list[dict], spells: list[str],
-         artifacts: list[dict]) -> None:
+def main(mages: list[dict[Any, Any]], spells: list[str],
+         artifacts: list[dict[str, int]]) -> None:
     print("===Testing artifact sorter===")
     print("Before sorting:")
     print(artifacts)
